@@ -34,11 +34,11 @@
 			],
 			"dependsOn": [
 				{
-					"conatinerName": "client",
+					"containerName": "client",
 					"condition": "START"
 				},
 				{
-					"conatinerName": "server",
+					"containerName": "server",
 					"condition": "START"
 				}
 			],
