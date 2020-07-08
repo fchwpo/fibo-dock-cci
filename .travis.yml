@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t fchwpo/fibo-dock-cci -f .client/Dockerfile.dev ./client
+  - docker build -t fchwpo/fibo-dock-cci -f ./client/Dockerfile.dev ./client
 
 script:
   # Run test commands
