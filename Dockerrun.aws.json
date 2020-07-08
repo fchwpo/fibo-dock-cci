@@ -1,0 +1,38 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "client",
+			"image": "fchwpo/fibo-dock-cci-client:latest",
+			"hostName": "client",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "fchwpo/fibo-dock-cci-worker:latest",
+			"hostName": "worker",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "fchwpo/fibo-dock-cci-server:latest",
+			"hostName": "express-server",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"image": "fchwpo/fibo-dock-cci-nginx:latest",
+			"essential": true,
+			"portMappings": [
+				{
+					"containerPort": "80",
+					"hostPort": "80"
+				}
+			],
+			"links": [
+				"client",
+				"server"
+			]
+		}
+	]
+}

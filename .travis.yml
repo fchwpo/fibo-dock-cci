@@ -23,3 +23,15 @@ after_success: # after sucess of test scripts
   - docker push fchwpo/fibo-dock-cci-server
   - docker push fchwpo/fibo-dock-cci-worker
   - docker push fchwpo/fibo-dock-cci-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "fibo-dock-cci"
+  env: "FiboDockCci-env"
+  bucket_name: "elasticbeanstalk-us-east-1-547273590547"
+  bucket_path: "fibo-dock-cci"
+  on: 
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
