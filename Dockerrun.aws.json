@@ -32,6 +32,16 @@
 					"hostPort": "80"
 				}
 			],
+			"dependsOn": [
+				{
+					"conatinerName": "client",
+					"condition": "START"
+				},
+				{
+					"conatinerName": "server",
+					"condition": "START"
+				}
+			],
 			"links": [
 				"client",
 				"server"
