@@ -1,0 +1,25 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t fchwpo/fibo-dock-cci -f ./Dockerfile.dev ./client
+
+script:
+  # Run test commands
+  - docker run -e CI=true fchwpo/fibo-dock-cci npm run test
+
+after_success: # after sucess of test scripts
+  # Build all production images
+  - docker build -t fchwpo/fibo-dock-cci-client ./client
+  - docker build -t fchwpo/fibo-dock-cci-server ./server
+  - docker build -t fchwpo/fibo-dock-cci-worker ./worker
+  - docker build -t fchwpo/fibo-dock-cci-nginx ./nginx
+  # Login into Docker through CLI
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  # Take all this images and push them to docker hub`
+  - docker push fchwpo/fibo-dock-cci-client
+  - docker push fchwpo/fibo-dock-cci-server
+  - docker push fchwpo/fibo-dock-cci-worker
+  - docker push fchwpo/fibo-dock-cci-nginx
